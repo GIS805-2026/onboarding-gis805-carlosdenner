@@ -1,8 +1,10 @@
 # Rétroaction automatisée -- S01 (Diagnostic fondamental -- NexaMart kickoff)
 
-_Générée le 2026-05-14T22:24:14+00:00 -- Run `20260514T221333Z-7d34bf6a`_
+_Générée le 2026-05-15T12:36:48+00:00 -- Run `20260515T122624Z-00a5a04f`_
 
 Ce document est produit par un pipeline reproductible (vérification SQL déterministe + analyse LLM du brief et de la déclaration IA). Une revue humaine précède toujours sa publication. **À ce stade expérimental, aucune note ni étiquette de niveau n'est diffusée : l'objectif est purement formatif.**
+
+> ⚠️ **Avertissement instructeur (à retirer avant publication) :** cette analyse a été générée avec `--skip-pull`. Le contenu correspond au commit local et **n'est peut-être pas la dernière version poussée par l'étudiant·e**.
 
 ---
 
@@ -15,65 +17,63 @@ _Observation technique : aucun bloc SQL fencé trouvé et extraction LLM échou�
 
 **Pistes :**
 > Aucun bloc ```sql ... ``` détecté. Encadrez votre requête finale dans la section « Preuve » pour fiabiliser l'auto-validation.
-> Extracteur LLM : Le brief fourni ne contient aucune requête SQL ; il est vide des sections « Preuve » ou « Réponse » où une requête finale aurait dû apparaître.
+> Extracteur LLM : Le brief fourni ne contient aucune requête SQL dans les sections 'Preuve' ou ailleurs, donc aucune requête principale à extraire.
 
 ## 2. Rétroaction pédagogique sur le brief
 
-> Le brief soumis est vide ou structurellement incomplet : aucune section n'a été renseignée. Remplissez les parties clés (réponse exécutive, modèle, preuve SQL et checks) avant la prochaine remise.
+> Le brief soumis est essentiellement vide et ne permet pas d'évaluer ni le modèle ni la preuve attendue pour répondre à la question du CEO. Complétez rapidement les sections clés (réponse exécutive, grain/model, requête de validation et trace de processus) en suivant les recommandations ci-dessus.
 
 ### Observations par dimension
 
 **Model quality**
-- Observation : brief absent ou trop court
-- Piste d'amélioration : Remplir la section « Décisions de modélisation » en précisant le grain, les dimensions et les mesures attendues (ex. grain = ligne de commande, mesures = quantité × prix unitaire).
+- Observation : Les sections du brief sont vides — aucune déclaration de grain, mesures ou dimensions.
+- Piste d'amélioration : Fournir un schéma en étoile minimal avec grain explicite (ex. ligne de commande order_id+product_id), dimensions clés et exemple d'agrégation attendue.
 
 **Validation quality**
-- Observation : brief absent ou trop court
-- Piste d'amélioration : Fournir au moins une requête SQL de validation et des contrôles attendus (ex. checks NULL, doublons du grain) avec résultats attendus.
+- Observation : Aucune requête SQL de validation fournie dans la section 'Preuve' ou 'Validation'.
+- Piste d'amélioration : Inclure une requête SQL de validation qui calcule le revenu net par catégorie/région/trimestre et au moins un contrôle de NULLs ou de doublons.
 
 **Executive justification**
-- Observation : brief absent ou trop court
-- Piste d'amélioration : Rédiger une réponse exécutive concise (150–300 mots) qui répond à la question du CEO et inclut une recommandation décisionnelle claire.
+- Observation : La 'Réponse exécutive' est absente — aucun résumé décisionnel ou recommandation pour le CEO.
+- Piste d'amélioration : Rédiger un paragraphe de 150–300 mots en langage business qui répond à la question CEO et propose une décision claire (ex. valider diagnostic et passer au DDL).
 
 **Process trace**
-- Observation : brief absent ou trop court
-- Piste d'amélioration : Inclure un journal de processus : liens vers commits git (≥1), note sur l'utilisation d'IA/outils et décisions de modélisation documentées.
+- Observation : Aucune trace de processus : pas de commits, pas de note d'usage IA ni de journal de décisions mentionnés.
+- Piste d'amélioration : Ajouter un log de commits (≥3 messages significatifs) et une note IA précisant outils utilisés et validations humaines effectuées.
 
 **Reproducibility**
-- Observation : brief absent ou trop court
-- Piste d'amélioration : Ajouter un README minimal et un script de check reproductible (DuckDB/SQL) pour permettre à un collègue de reproduire les résultats.
-
-_Quelques points appellent une attention particulière lors de la prochaine itération : brief absent ou sections non renseignées._
+- Observation : Aucun renseignement sur la reproduction (README, scripts, ou instructions) dans le brief.
+- Piste d'amélioration : Fournir des instructions pas-à-pas dans le README pour cloner le repo et exécuter les checks (DuckDB + make check) sans chemins codés en dur.
 
 ## 3. Déclaration d'utilisation de l'IA
 
-> La déclaration contient un exemple utile qui mentionne l'outil, l'étape et comment la sortie a été vérifiée. Il manque en revanche toute mention des limites ou erreurs observées; fournissez aussi des versions/modèles plus précises et remplacez l'exemple par vos entrées réelles.
+> Le fichier contient un modèle d'enregistrement utile et montre comment documenter la validation humaine. Il manque toutefois des informations réelles et la rubrique sur les limites/erreurs n'est pas fournie ; indiquez aussi la version/modèle précis utilisé pour chaque entrée.
 
 **Sujets bien couverts dans votre déclaration :**
 
-- outils utilisés (nom + version/modèle)
 - à quelle étape l'IA a été utilisée
 - comment la sortie a été validée par l'humain
 
 **Sujets à ajouter ou expliciter pour la prochaine itération :**
 
+- outils utilisés (nom + version/modèle)
 - limites ou erreurs observées
 
 ## 4. Pistes d'action pour la prochaine itération
 
 - Reprendre la requête de la section « Preuve » pour qu'elle s'exécute sur `db/nexamart.duckdb` et qu'elle produise la forme attendue (voir pistes en section 1).
-- Réviser le brief en tenant compte des observations par dimension de la section 2.
 - Compléter `ai-usage.md` en y ajoutant : limites ou erreurs observées.
+- Compléter `ai-usage.md` en y ajoutant : outils utilisés (nom + version/modèle).
 
 ---
 
 ## 5. Traçabilité
 
-- **Run ID :** `20260514T221333Z-7d34bf6a`
+- **Run ID :** `20260515T122624Z-00a5a04f`
 - **Devoir :** `S01`
 - **Étudiant·e :** `carlosdenner`
-- **Commit analysé :** `478bff3`
-- **Audit (côté instructeur) :** `tools/instructor/feedback_pipeline/audit/20260514T221333Z-7d34bf6a/carlosdenner/`
+- **Commit analysé :** `e84340c`
+- **Audit (côté instructeur) :** `tools/instructor/feedback_pipeline/audit/20260515T122624Z-00a5a04f/carlosdenner/`
 - **Prompts (SHA-256) :**
   - `sql_extractor_system` : `90ee9e277de7a27f...`
   - `rubric_grader_system` : `505f32d1d8319d66...`
